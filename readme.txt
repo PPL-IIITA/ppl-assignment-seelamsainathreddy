@@ -1,0 +1,10 @@
+NAME OF STUDENT : seelam sainath reddy
+ENROLLMENT NUMBER: ISM2015006
+SECTION : B
+
+OPERATING SYSTEM: UBUNTU 15.04
+
+SOFWARE: netbeans 8.4
+
+execute on netbeans IDE;
+
