@@ -1,0 +1,166 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ipplprob4;
+
+import java.util.Scanner;/**To take input*/
+import java.io.File;/**For file creation*/
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.lang.Object;
+import java.util.Objects;
+
+public class Ipplprob4 {
+
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
+       
+        
+      int girlCount,i,n,boyCount,coupleCount = 0,c;
+      
+      
+      
+     //inpting no of pair array required
+      File file = new File(System.getProperty("user.dir")+"/input");
+        Scanner scan = new Scanner(file);
+       n = scan.nextInt();
+      DatingCouples[] pair = new DatingCouples[n+1];  
+       
+       
+      //inputng girls
+       girl g[] = new girl[n];
+       for(i=0;i<n;i++)
+       {
+           g[i] = new girl();
+           g[i].naam = scan.next();
+           g[i].sundar = scan.nextDouble();
+           g[i].buddi = scan.nextDouble();
+           g[i].maintainance = scan.nextDouble();
+           g[i].preferance = scan.next();
+           g[i].kounsa = scan.next();
+       }
+       girlCount = n;
+       
+       //inputing boys
+       //file = input.getFile(2);
+       //scan = new Scanner(file);
+       n = scan.nextInt();
+       boy[] b = new boy[n];
+       for(i=0;i<n;i++)
+       {
+          b[i] = new boy();
+          b[i].naam = scan.next();
+          b[i].sundar= scan.nextDouble();
+          b[i].buddi = scan.nextDouble();
+          b[i].paise = scan.nextDouble();
+          b[i].kaise = scan.next();
+          b[i].minimumSundarRequire = scan.nextDouble();
+       }
+  
+       
+       //inputing gifts     
+     //  file = input.getFile(3);
+       //scan = new Scanner (file);
+      
+       n = scan.nextInt();
+       gift[] bahuman = new gift[n];
+       for ( i = 0; i < n ; i ++ )
+       {
+           bahuman[i] = new gift();
+           bahuman[i].name = scan.next();
+           bahuman[i].type = scan.nextInt();
+           bahuman[i].price = scan.nextDouble();
+          
+        }
+       
+       //Sorting Gifts
+        gift temp = new gift();
+        for ( i = 0;i < n; i ++)
+        {
+            
+            for(int j = i + 1; j < n; j ++)
+            {
+        
+                if (bahuman[i].price > bahuman[j].price)
+                {
+                    temp = bahuman[i];
+ 
+                    bahuman[i] = bahuman[j];
+                    bahuman[j] = temp;
+                }
+              
+            }
+        }
+       
+       //computing ration status 
+       for ( i = 0,c = 0; i < g.length; i ++ )
+       {
+            
+          if(DatingCouples.examineCouple(b[i],g[i])) {
+             
+       
+                  pair[c] = new DatingCouples(g[i],b[i]);
+                  System.out.println(pair[c].b.naam + " " + pair[c].g.naam);
+                  pair[c].calculateRelation(bahuman, bahuman.length);
+                
+                  c++;
+               }
+               
+          
+          coupleCount = c;
+         }    
+    
+  //priinting k most happy couples and  compatable
+ 
+    System.out.println("Enter any number less than " +coupleCount);
+    //scan = new Scanner(file);
+    int k = scan.nextInt();
+    
+ System.out.println("the "+ k +" most happy couples");
+    DatingCouples.sortByHappiness(pair,coupleCount);
+    if(k < coupleCount)
+    {
+        for ( i= 0; i<k; i++) {
+                System.out.println(pair[i].b.naam +" "+pair[i].g.naam);
+        }
+    }
+    
+   
+ DatingCouples.sortByCompatability(pair, coupleCount);
+ System.out.println("the "+ k +" most compatable couples");
+    if(k < coupleCount)
+    {
+        for ( i= 0; i<k; i++) {
+                System.out.println(pair[i].b.naam +" "+pair[i].g.naam);
+        }
+    }
+    
+
+
+     //This part of code prints the k happiest couples;   
+    
+    k = scan.nextInt();
+    if(k < coupleCount)
+    {
+        System.out.println("the "+ k + " most compatible couples");
+        }
+        for ( i= 0; i<k; i++) {
+                System.out.println(pair[i].b.naam + " "  + pair[i].g.naam );
+        }
+        
+    
+        k = scan.nextInt();
+	DatingCouples.brokeUpAndReassign(pair,coupleCount,k);
+	
+	
+	
+}
+}
+
+       
+       
+       
+    
+    
